@@ -11,3 +11,8 @@ exports.answer = function(req, res) {
  		res.render('quizes/answer', {respuesta: 'Incorrecto'});
  	}
 };
+
+// GET /authors
+exports.autores = function(req, res) {
+ 	res.render('author', {autores: 'Enrique García Rubio y José María Izquierdo Mora'});
+};
