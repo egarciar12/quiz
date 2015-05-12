@@ -14,11 +14,32 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes
 exports.index = function(req, res) {
-  models.Quiz.findAll().then(
+  var busqueda = req.query.search;
+  if(busqueda == null){
+    models.Quiz.findAll().then(
     function(quizes) {
       res.render('quizes/index', { quizes: quizes});
     }
   ).catch(function(error) { next(error);})
+  } 
+
+  else{
+    models.Quiz.findAll({where: ["pregunta like ?", "%" + busqueda + "%"]}).then(
+    function(quizes) {
+      res.render('quizes/index', { quizes: quizes});
+    }
+  ).catch(function(error) { next(error);})
+  }
+  
+
+ /*var busqueda = req.query.search;
+  //findAll({where: ["pregunta like ?", busqueda]}]  
+
+  models.Quiz.findAll({where: ["pregunta like ?", "%" + busqueda + "%"]}).then(
+    function(quizes) {
+      res.render('quizes/index', { quizes: quizes});
+    }
+  ).catch(function(error) { next(error);})*/
 
 };
 
@@ -40,3 +61,16 @@ exports.answer = function(req, res) {
 exports.autores = function(req, res) {
  	res.render('author', {autores: 'Enrique García Rubio y José María Izquierdo Mora'});
 };
+
+// GET /search
+/*exports.search = function(req, res) {
+  var busqueda = req.query.search;
+  //findAll({where: ["pregunta like ?", busqueda]}]  
+
+  models.Quiz.findAll({where: ["pregunta like ?", "%" + busqueda + "%"]}).then(
+    function(quizes) {
+      res.render('quizes/index', { quizes: quizes});
+    }
+  ).catch(function(error) { next(error);})
+
+};*/
