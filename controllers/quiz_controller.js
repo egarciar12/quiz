@@ -71,7 +71,7 @@ exports.answer = function(req, res) {
 
 // GET /authors
 exports.autores = function(req, res) {
- 	res.render('author', {autores: 'Enrique García Rubio y José María Izquierdo Mora'});
+ 	res.render('author', {autores: 'Enrique García Rubio y José María Izquierdo Mora' , errors: []});
 };
 
 // GET /search
@@ -150,3 +150,4 @@ exports.destroy = function(req, res) {
     res.redirect('/quizes');
   }).catch(function(error){next(error)});
 };
+

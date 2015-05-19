@@ -4,6 +4,7 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
+var staticsController = require('../controllers/statics_controller');
 
 // Página de entrada (home page)
 router.get('/', sessionController.logoutTime, function(req, res) {
@@ -11,8 +12,8 @@ router.get('/', sessionController.logoutTime, function(req, res) {
 });
 
 // Autoload de comandos con :quizId
-router.param('quizId', sessionController.logoutTime,  quizController.load);  // autoload :quizId
-router.param('commentId', sessionController.logoutTime, commentController.load);  // autoload :commentId
+router.param('quizId',   quizController.load);  // autoload :quizId
+router.param('commentId',  commentController.load);  // autoload :commentId
 
 // Definición de rutas de sesion
 router.get('/login', sessionController.logoutTime, sessionController.new);     // formulario login
@@ -34,6 +35,9 @@ router.get('/quizes/:quizId(\\d+)/comments/new',           sessionController.log
 router.post('/quizes/:quizId(\\d+)/comments',              sessionController.logoutTime, commentController.create);
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', 
 	                                    sessionController.logoutTime, sessionController.loginRequired, commentController.publish);
+
+router.get('/quizes/statics', sessionController.logoutTime, staticsController.estadisticas);
+
 
 
 module.exports = router;
