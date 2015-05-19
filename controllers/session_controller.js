@@ -7,6 +7,23 @@ exports.loginRequired = function(req, res, next){
     }
 };
 
+// MW de tiempo expirado
+exports.logoutTime = function (req, res, next) {
+     
+     if (req.session.user) {
+       var tiempo = new Date().getTime();
+    if(tiempo > req.session.user.time){
+        delete req.session.user;
+        res.redirect('/login?redir=' + req.url);        
+    }else{
+        req.session.user.time = tiempo + 120000;
+        next();
+    }
+    } else {
+        next();
+    }
+};
+
 
 // Get /login   -- Formulario de login
 exports.new = function(req, res) {
