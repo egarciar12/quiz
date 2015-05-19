@@ -18,6 +18,8 @@ router.get('/author', quizController.autores);
 router.get('/search', quizController.index);
 router.get('/quizes/new',                  quizController.new);
 router.post('/quizes/create',              quizController.create);
+router.get('/quizes/:quizId(\\d+)/edit',   quizController.edit);
+router.put('/quizes/:quizId(\\d+)',        quizController.update);
 
 
 module.exports = router;
