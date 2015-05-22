@@ -42,6 +42,7 @@ router.post('/quizes/create',              sessionController.logoutTime, session
 router.get('/quizes/:quizId(\\d+)/edit',   sessionController.loginRequired, quizController.ownershipRequired, quizController.edit);
 router.put('/quizes/:quizId(\\d+)',        sessionController.loginRequired, quizController.ownershipRequired, multer({ dest: './public/media/'}), quizController.update);
 router.delete('/quizes/:quizId(\\d+)',     sessionController.loginRequired, quizController.ownershipRequired, quizController.destroy);
+router.get('/user/:userId(\\d+)/quizes',  quizController.index);
 
 router.get('/quizes/:quizId(\\d+)/comments/new',           sessionController.logoutTime,  commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments',              sessionController.logoutTime, commentController.create);
