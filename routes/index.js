@@ -7,6 +7,7 @@ var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
 var staticsController = require('../controllers/statics_controller');
 var userController = require('../controllers/user_controller');
+var favouriteController = require('../controllers/favourites_controller');
 
 // Página de entrada (home page)
 router.get('/', sessionController.logoutTime, function(req, res) {
@@ -52,5 +53,16 @@ router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish',
 router.get('/quizes/statics', sessionController.logoutTime, staticsController.estadisticas);
 
 
+/*router.get('/user/:userId/favourites', favouriteController.index);
+router.put('/user/:userId/favourites/:quizId', sessionController.logoutTime, sessionController.loginRequired, userController.loggedUserIsUser, favouriteController.add);
+router.delete('/user/:userId/favourites/:quizId', sessionController.logoutTime, sessionController.loginRequired, userController.loggedUserIsUser, favouriteController.delele);*/
+/*
+router.put('/user/:userId(\\d+)/favourites/:quizId(\\d+)',		 sessionController.loginRequired, favouriteController.add);
+router.delete('/user/:userId(\\d+)/favourites/:quizId(\\d+)',	 sessionController.loginRequired, favouriteController.delete);
+router.get('/user/:userId(\\d+)/favourites',					 favouriteController.index);
 
+*/
+
+router.put('/user/:userId(\\d+)/favourites/:quizId(\\d+)',sessionController.loginRequired,favouriteController.add);
+router.get('/user/:userId(\\d+)/favourites',favouriteController.index);
 module.exports = router;
